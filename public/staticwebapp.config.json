@@ -9,10 +9,10 @@
     "identityProviders": {
       "azureActiveDirectory": {
         "registration": {
-          "clientIdSettingName": "8dcec823-8928-41f7-a9b5-e85db1dc6c12",
+          "clientIdSettingName": "AUTH_CLIENT_ID",
           "openIdIssuer": "https://login.microsoftonline.com/9ff87f7c-8358-46b5-88bc-d73c09ce789f/v2.0",
           "clientCredential": {
-            "clientSecretSettingName": "fcy8Q~E2wPa6u5EyxLOrbS4Pp8dePnFbMFkQXc7Y"
+            "clientSecretSettingName": "AUTH_CLIENT_SECRET"
           },
           "login": {
             "loginEndpoint": "/.auth/login/aad"
