@@ -1,0 +1,39 @@
+
+{
+  "routes": [
+    { "route": "/.auth/*", "allowedRoles": ["anonymous","authenticated"] },
+    { "route": "/login", "rewrite": "/.auth/login/aad?post_login_redirect_uri=.referrer", "allowedRoles": ["anonymous","authenticated"] },
+    { "route": "/api/*", "allowedRoles": ["authenticated"] },
+    { "route": "/*", "allowedRoles": ["authenticated"] }
+  ],
+  "auth": {
+    "identityProviders": {
+      "azureActiveDirectory": {
+        "registration": {
+          "clientIdSettingName": "8dcec823-8928-41f7-a9b5-e85db1dc6c12",
+          "openIdIssuer": "https://login.microsoftonline.com/9ff87f7c-8358-46b5-88bc-d73c09ce789f/v2.0",
+          "clientCredential": {
+            "clientSecretSettingName": "fcy8Q~E2wPa6u5EyxLOrbS4Pp8dePnFbMFkQXc7Y"
+          },
+          "login": {
+            "loginEndpoint": "/.auth/login/aad"
+          }
+        }
+      }
+    }
+  },
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/api/*", "/.auth/*"]
+  },
+  "responseOverrides": {
+    "401": {
+      "redirect": "/.auth/login/aad?post_login_redirect_uri=.referrer",
+      "statusCode": 302
+    },
+    "403": {
+      "redirect": "/.auth/login/aad?post_login_redirect_uri=.referrer",
+      "statusCode": 302
+    }
+  }
+}
