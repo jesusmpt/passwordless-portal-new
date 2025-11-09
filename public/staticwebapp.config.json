@@ -1,9 +1,11 @@
 {
   "routes": [
-    { "route": "/.auth/*", "allowedRoles": ["anonymous","authenticated"] },
-    { "route": "/login", "rewrite": "/.auth/login/aad?post_login_redirect_uri=.referrer", "allowedRoles": ["anonymous","authenticated"] },
-    { "route": "/api/*", "allowedRoles": ["authenticated"] },
-    { "route": "/*", "allowedRoles": ["authenticated"] }
+  {
+            "route": "/*",
+            "allowedRoles": [
+                "authenticated"
+            ]
+        }
   ],
   "auth": {
     "identityProviders": {
@@ -15,7 +17,7 @@
             "clientSecretSettingName": "fcy8Q~E2wPa6u5EyxLOrbS4Pp8dePnFbMFkQXc7Y"
           },
           "login": {
-            "loginEndpoint": "/.auth/login/aad"
+            "loginEndpoint": "/.auth/login/aad?post_login_redirect_uri=.referrer"
           }
         }
       }
@@ -27,11 +29,11 @@
   },
   "responseOverrides": {
     "401": {
-      redirect": "/.auth/login/aad",
+      redirect": "/.auth/login/aad?post_login_redirect_uri=.referrer",
       "statusCode": 302
     },
     "403": {
-      redirect": "/.auth/login/aad",
+      redirect": "/.auth/login/aad?post_login_redirect_uri=.referrer",
       "statusCode": 302
     }
   }
