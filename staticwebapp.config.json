@@ -1,3 +1,4 @@
+
 {
   "routes": [
     { "route": "/.auth/*", "allowedRoles": ["anonymous","authenticated"] },
@@ -9,10 +10,10 @@
     "identityProviders": {
       "azureActiveDirectory": {
         "registration": {
-          "clientIdSettingName": "8dcec823-8928-41f7-a9b5-e85db1dc6c12",
-          "openIdIssuer": "https://login.microsoftonline.com/9ff87f7c-8358-46b5-88bc-d73c09ce789f/v2.0",
+          "clientIdSettingName": "AUTH_CLIENT_ID",
+          "openIdIssuer": "https://login.microsoftonline.com/<TENANT_ID>/v2.0",
           "clientCredential": {
-            "clientSecretSettingName": "fcy8Q~E2wPa6u5EyxLOrbS4Pp8dePnFbMFkQXc7Y"
+            "clientSecretSettingName": "AUTH_CLIENT_SECRET"
           },
           "login": {
             "loginEndpoint": "/.auth/login/aad"
@@ -23,15 +24,15 @@
   },
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": [ "/api/*", "/.auth/*" ]
+    "exclude": ["/api/*", "/.auth/*"]
   },
   "responseOverrides": {
     "401": {
-      redirect": "/.auth/login/aad",
+      "redirect": "/.auth/login/aad?post_login_redirect_uri=.referrer",
       "statusCode": 302
     },
     "403": {
-      redirect": "/.auth/login/aad",
+      "redirect": "/.auth/login/aad?post_login_redirect_uri=.referrer",
       "statusCode": 302
     }
   }
